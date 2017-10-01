@@ -4,7 +4,8 @@ $(document).ready(function () {
         type: 'scatter',
         data: {
             datasets: [
-                getMockDataset()
+                //getMockSineDataset()
+                getBarnsleyDataset(10000)
             ]
         },
         options: {
@@ -17,16 +18,27 @@ $(document).ready(function () {
     });
 });
 
-function getMockDataset() {
+function getDataset(label, data) {
+    return {
+        label: label,
+        data: data
+    };
+}
+
+function getBarnsleyDataset(iterations) {
+    return getDataset("Barnsley's fern", barnsley(iterations))
+}
+
+function getMockSineDataset() {
+    return getDataset("Sine", getMockSineData());
+}
+
+function getMockSineData() {
     var data = [];
     for (var x = -Math.PI; x < Math.PI; x += 0.1)
         data.push({
             x: x,
             y: Math.sin(x)
         });
-
-    return {
-        label: 'Sine',
-        data: data
-    };
+    return data;
 }
