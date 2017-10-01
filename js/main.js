@@ -11,7 +11,8 @@ $(document).ready(function () {
             title: {
                 display: true,
                 text: 'Testing'
-            }
+            },
+            events: []
         }
     });
 });
@@ -24,7 +25,6 @@ function getMockDataset() {
             y: Math.sin(x)
         });
 
-    console.log(data);
     return {
         label: 'Sine',
         data: data
