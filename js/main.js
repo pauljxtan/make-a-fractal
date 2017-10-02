@@ -1,12 +1,16 @@
 var rgbaBlack = 'rgba(0,0,0,1';
 
 $(document).ready(function () {
-    $('#graph').hide(function () {
-        var data = barnsley(20000);
-        createGraphAndHandlers(data);
-        $(this).fadeIn(1000);
-    });
+    drawFractal(barnsley, 20000);
 });
+
+function drawFractal(ifsFunction, iterations) {
+    $('#graph').fadeOut(1000, function () {
+        var data = ifsFunction(iterations);
+        createGraphAndHandlers(data);
+        $('#graph').fadeIn(1000);
+    });
+}
 
 function createGraphAndHandlers(data) {
     // Sort the data so that various dygraph functions work properly
