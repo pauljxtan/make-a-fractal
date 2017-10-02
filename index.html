@@ -9,34 +9,61 @@
 <body>
 
 <div class="container">
-    <h1 class="title">Make a fractal</h1>
-    <p class="subtitle">Fully client-side fractal visualization</p>
-
-    <p>The fractals here are drawn using a neat technique known as an <a
-            href="https://en.wikipedia.org/wiki/Iterated_function_system">iterated function system (IFS)</a>.
-        Basically: for a given fractal, we have a set of transformations, each of which may be applied with some
-        probability (e.g., 1 out of 10 times). These transformations are applied iteratively over and over - the more
-        iterations, the more
-        self-similarity emerges (and the cooler it looks).</p>
-    <br>
-    <p>The charting is done with the excellent <a href="https://github.com/danvk/dygraphs">dygraphs</a> library.</p>
-    <br>
-    <p>Fractals currently implemented:</p>
-    <ul>
-        <a href="https://en.wikipedia.org/wiki/Barnsley_fern">Barnsley's fern</a>
-    </ul>
-    <br>
-    TODO:
-    <ul>
-        <li>Select from pre-defined fractal type</li>
-        <li>Select number of iterations - this should probably be capped, so maybe choose from a list for now</li>
-        <li>For now, plot the whole thing at once - eventually a "real-time" animation would be cooler - need to
-            investigate that capability with dygraphs
-        </li>
-    </ul>
-    <a class="button" id="unzoom-button">Zoom out</a>
-    <div id="graph"></div>
-
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <h1 class="title">Make a fractal</h1>
+            <h2 class="subtitle">Fully client-side fractal visualization</h2>
+        </div>
+    </section>
+    <section class="section">
+        <div class="tile is-ancestor">
+            <div class="tile is-8 is-vertical is-parent">
+                <div class="tile is-child box">
+                    <p>Highlight a region to zoom in. Double-click to zoom back out.</p>
+                    <p><small>Note: Generally, cool self-similarity tends shows up by around 10^4 - 10^5 iterations. I wouldn't
+                        recommend going much beyond that, but since this is all client-side, it's really up to you. Have fun!</small></p>
+                    <div id="graph"></div>
+                </div>
+            </div>
+            <div class="tile is-vertical is-parent">
+                <div class="tile is-child box">
+                    <p>The fractals here are drawn using a neat technique known as an <a
+                            href="https://en.wikipedia.org/wiki/Iterated_function_system">iterated function system
+                        (IFS)</a>.
+                        Basically: for a given fractal, we have a set of transformations, each of which may be applied
+                        with
+                        some
+                        probability (e.g., 1 out of 10 times). These transformations are applied iteratively over and
+                        over -
+                        the more
+                        iterations, the more
+                        self-similarity emerges (and the cooler it looks).</p>
+                    <br>
+                    <p>The charting is done with the excellent <a href="https://github.com/danvk/dygraphs">dygraphs</a>
+                        library.</p>
+                    <br>
+                    <p>Fractals currently implemented:</p>
+                    <ul>
+                        <li><a href="https://en.wikipedia.org/wiki/Barnsley_fern">Barnsley's fern</a></li>
+                    </ul>
+                    <br>
+                    <p>TODO:</p>
+                    <ul>
+                        <li>Get dynamic resizing working</li>
+                        <li>Select from pre-defined fractal type</li>
+                        <li>Select number of iterations - this should probably be capped, so maybe choose from a list
+                            for
+                            now
+                        </li>
+                        <li>For now, plot the whole thing at once - eventually a "real-time" animation would be cooler -
+                            need to
+                            investigate that capability with dygraphs
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 <script src="js/vendor/jquery-3.2.1.min.js"></script>

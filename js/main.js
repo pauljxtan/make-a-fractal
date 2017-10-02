@@ -1,14 +1,18 @@
 var rgbaBlack = 'rgba(0,0,0,1';
 
 $(document).ready(function () {
-    var data = barnsley(50000);
-    // var data = getMockSineData(32);
+    $('#graph').hide(function () {
+        var data = barnsley(20000);
+        createGraphAndHandlers(data);
+        $(this).fadeIn(1000);
+    });
+});
 
-    // Save min and max on each axis for resetting zoom
-    var xMinMax = minMaxByDim(data, 0);
-    var yMinMax = minMaxByDim(data, 1);
-    var fullDateWindow = [xMinMax.min, xMinMax.max];
-    var fullValueRange = [yMinMax.min, yMinMax.max];
+function createGraphAndHandlers(data) {
+    // Sort the data so that various dygraph functions work properly
+    data.sort(function (a, b) {
+        return a[0] - b[0];
+    });
 
     var graph = new Dygraph(
         document.getElementById('graph'),
@@ -18,37 +22,9 @@ $(document).ready(function () {
             strokeWidth: 0.0,
             height: 500,
             width: 500,
-            dateWindow: fullDateWindow,
-            valueRange: fullValueRange,
-            legend: 'never',
-
+            legend: 'never'
         }
     );
-
-    $('#unzoom-button').click(function () {
-        graph.updateOptions({
-            dateWindow: fullDateWindow,
-            valueRange: fullValueRange
-        });
-    });
-});
-
-
-function minMaxByDim(multiDimArray, dim) {
-    var dimArray = multiDimArray.map(function (elem) {
-        return elem[dim]
-    });
-    var min = Math.min.apply(null, dimArray);
-    var max = Math.max.apply(null, dimArray);
-    return {min: min, max: max};
-}
-
-function getMockSineData(points) {
-    var data = [];
-    var step = 2.0 * Math.PI / points;
-    for (var x = -Math.PI; x < Math.PI; x += step)
-        data.push([x, Math.sin(x)]);
-    return data;
 }
 
 /**************** FRACTALS ****************/
@@ -112,3 +88,23 @@ function barnsley(iterations) {
     }
     return data;
 }
+
+/**************** HELPERS ****************/
+
+function minMaxByDim(multiDimArray, dim) {
+    var dimArray = multiDimArray.map(function (elem) {
+        return elem[dim]
+    });
+    var min = Math.min.apply(null, dimArray);
+    var max = Math.max.apply(null, dimArray);
+    return {min: min, max: max};
+}
+
+function getMockSineData(points) {
+    var data = [];
+    var step = 2.0 * Math.PI / points;
+    for (var x = -Math.PI; x < Math.PI; x += step)
+        data.push([x, Math.sin(x)]);
+    return data;
+}
+
