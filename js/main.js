@@ -1,14 +1,39 @@
-var rgbaBlack = 'rgba(0,0,0,1';
+// We look up the IFS function for the selected fractal in here
+var ifsFunctionTable = {
+    'barnsley': barnsley
+};
 
 $(document).ready(function () {
-    drawFractal(barnsley, 20000);
+    $('#draw-button').click(function () {
+        var fractal = $('#fractal-select').val();
+        var iterations = $('#iterations-input').val();
+
+        if (!(fractal in ifsFunctionTable)) {
+            alert('Please select a fractal.');
+            return;
+        }
+        if (iterations < 1) {
+            alert('Please enter a number of iterations.');
+            return;
+        }
+        if (iterations > 1000000) {
+            alert('Please enter fewer than 1,000,000 iterations.');
+            return;
+        }
+
+        $('#draw-button').addClass('is-loading');
+        drawFractal(ifsFunctionTable[fractal], iterations);
+    });
 });
 
 function drawFractal(ifsFunction, iterations) {
     $('#graph').fadeOut(1000, function () {
         var data = ifsFunction(iterations);
         createGraphAndHandlers(data);
-        $('#graph').fadeIn(1000);
+        // The fade-in doesn't seem to work very well for large datasets (> 30,000)
+        $('#graph').fadeIn(1000, function() {
+            $('#draw-button').removeClass('is-loading');
+        });
     });
 }
 
@@ -26,7 +51,7 @@ function createGraphAndHandlers(data) {
             strokeWidth: 0.0,
             height: 500,
             width: 500,
-            legend: 'never'
+            legend: 'never',
         }
     );
 }

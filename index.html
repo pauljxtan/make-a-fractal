@@ -20,13 +20,38 @@
     <div class="tile is-ancestor">
         <div class="tile is-8 is-vertical is-parent">
             <div class="tile is-child box">
-                <p>
-                    <small>Generally, really cool self-similarity tends to show up around 10^4 - 10^5 iterations. I
-                        wouldn't
-                        recommend going much beyond that, but since this is all client-side, it's really up to you (and
-                        your machine). Have
-                        fun!
-                    </small>
+                <div class="box" id="form" >
+                    <div class="field">
+                        <label class="label">Fractal</label>
+                        <div class="control">
+                            <div class="select is-primary">
+                                <select id="fractal-select">
+                                    <option>Select a fractal</option>
+                                    <option value="barnsley">Barnsley's fern</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Iterations</label>
+                        <div class="control">
+                            <input class="input is-info" id="iterations-input" type="number" placeholder="Max. 1,000,000">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-success" id="draw-button">
+                                Draw it
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <p class="is-size-7">
+                    Generally, really cool self-similarity tends to show up around 10^4 - 10^5 iterations. I
+                    wouldn't
+                    recommend going much beyond that, but since this is all client-side, it's really up to you (and
+                    your machine). Have
+                    fun!
                 </p>
                 <p>Highlight a region to zoom in. Double-click to zoom back out.</p>
                 <div id="graph"></div>
