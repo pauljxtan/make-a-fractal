@@ -1,6 +1,6 @@
 // We look up the IFS function for the selected fractal in here
 var ifsFunctionTable = {
-    'barnsley': barnsley
+    'barnsley': {niceName: "Barnsley's fern", ifsFunction: barnsley}
 };
 
 $(document).ready(function () {
@@ -26,18 +26,23 @@ $(document).ready(function () {
     });
 });
 
-function drawFractal(ifsFunction, iterations) {
-    $('#graph').fadeOut(1000, function () {
-        var data = ifsFunction(iterations);
-        createGraphAndHandlers(data);
-        // The fade-in doesn't seem to work very well for large datasets (> 30,000)
-        $('#graph').fadeIn(1000, function() {
-            $('#draw-button').removeClass('is-loading');
+function drawFractal(ifsFunctionInfo, iterations) {
+    $('#loading').fadeIn(250, function () {
+        $('#graph').fadeOut(1000, function () {
+            var data = ifsFunctionInfo.ifsFunction(iterations);
+            var niceName = ifsFunctionInfo.niceName;
+            createGraphAndHandlers(data, niceName + ' (' + iterations + ' iterations)');
+            $('#loading').fadeOut(250, function () {
+                // The fade-in doesn't seem to work very well for large datasets (> 30,000)
+                $('#graph').fadeIn(1000, function () {
+                    $('#draw-button').removeClass('is-loading');
+                });
+            })
         });
     });
 }
 
-function createGraphAndHandlers(data) {
+function createGraphAndHandlers(data, title) {
     // Sort the data so that various dygraph functions work properly
     data.sort(function (a, b) {
         return a[0] - b[0];
@@ -47,11 +52,16 @@ function createGraphAndHandlers(data) {
         document.getElementById('graph'),
         data,
         {
+            title: title,
             drawPoints: true,
             strokeWidth: 0.0,
-            height: 500,
-            width: 500,
+            height: 670,
+            width: 670,
             legend: 'never',
+            axes: {
+                x: {drawAxis: false, drawGrid: false},
+                y: {drawAxis: false, drawGrid: false}
+            }
         }
     );
 }
