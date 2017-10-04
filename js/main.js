@@ -4,6 +4,12 @@ var ifsFunctionTable = {
 };
 
 $(document).ready(function () {
+    $('#iterations-info').tooltip({
+        position: {
+            at: 'right'
+        }
+    });
+
     $('#draw-button').click(function () {
         var fractal = $('#fractal-select').val();
         var iterations = $('#iterations-input').val();

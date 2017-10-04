@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Make a fractal</title>
     <link rel="stylesheet" href="css/vendor/bulma.min.css">
+    <link rel="stylesheet" href="css/vendor/jquery-ui.min.css">
     <link rel="stylesheet" href="css/vendor/dygraph.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
@@ -17,7 +18,6 @@
         </div>
     </section>
     <section class="section" id="main-section">
-
         <div class="columns is-desktop">
             <div class="column">
                 <!--<div class="box" id="graph-box">-->
@@ -34,7 +34,8 @@
                         </div>
                     </div>
                     <div class="field">
-                        <label class="label">Iterations</label>
+                        <label class="label">Iterations <a id="iterations-info"
+                                                           title="Generally, really cool self-similarity tends to show up around 10^4 - 10^5 iterations. I wouldn't recommend going much beyond that, but since this is all client-side, it's really up to you (and your machine).">(?)</a></label>
                         <div class="control">
                             <input class="input is-info" id="iterations-input" type="number"
                                    placeholder="Max. 1,000,000">
@@ -49,13 +50,6 @@
                     </div>
                 </div>
                 <hr>
-                <p class="is-size-7">
-                    Generally, really cool self-similarity tends to show up around 10^4 - 10^5 iterations. I
-                    wouldn't
-                    recommend going much beyond that, but since this is all client-side, it's really up to you (and
-                    your machine). Have
-                    fun!
-                </p>
                 <p>Highlight a region to zoom in. Double-click to zoom back out.</p>
                 <div class="" id="graph-container">
                     <div id="graph"></div>
@@ -94,9 +88,9 @@
                     </tr>
                     </tbody>
                 </table>
+                <hr>
                 <p>TODO:</p>
                 <ul>
-                    <li>Iterations blurb popover</li>
                     <li>Center graph container</li>
                     <li>Show computation time</li>
                     <li>For now, plot the whole thing at once - eventually a "real-time" animation would be cooler -
@@ -112,6 +106,7 @@
 <div id="loading" class="loading"></div>
 
 <script src="js/vendor/jquery-3.2.1.min.js"></script>
+<script src="js/vendor/jquery-ui.min.js"></script>
 <script src="js/vendor/dygraph.min.js"></script>
 <script src="js/main.js"></script>
 
