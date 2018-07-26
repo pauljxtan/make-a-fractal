@@ -1,106 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Make a fractal</title>
-    <link rel="stylesheet" href="css/vendor/bulma.min.css">
-    <link rel="stylesheet" href="css/vendor/jquery-ui.min.css">
-    <link rel="stylesheet" href="css/vendor/dygraph.css">
-    <link rel="stylesheet" href="css/main.css">
+  <meta charset="UTF-8">
+  <title>Make a fractal</title>
+  <link rel="stylesheet" href="css/vendor/bulma.min.css">
+  <link rel="stylesheet" href="css/vendor/jquery-ui.min.css">
+  <link rel="stylesheet" href="css/vendor/dygraph.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
 <div class="container">
-    <section class="hero is-primary">
-        <div class="hero-body">
-            <h1 class="title">Make a fractal</h1>
-            <h2 class="subtitle">Fully client-side fractal visualization</h2>
-        </div>
-    </section>
-    <section class="section" id="main-section">
-        <div class="columns is-desktop">
-            <div class="column">
-                <!--<div class="box" id="graph-box">-->
-                <div id="form">
-                    <div class="field">
-                        <label class="label">Fractal</label>
-                        <div class="control">
-                            <div class="select is-primary">
-                                <select id="fractal-select">
-                                    <option>Select a fractal</option>
-                                    <option value="barnsley">Barnsley's fern</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Iterations <a id="iterations-info"
-                                                           title="Generally, really cool self-similarity tends to show up around 10^4 - 10^5 iterations. I wouldn't recommend going much beyond that, but since this is all client-side, it's really up to you (and your machine).">(?)</a></label>
-                        <div class="control">
-                            <input class="input is-info" id="iterations-input" type="number"
-                                   placeholder="Max. 1,000,000">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="control">
-                            <button class="button is-success" id="draw-button">
-                                Draw it
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <p>Highlight a region to zoom in. Double-click to zoom back out.</p>
-                <div class="" id="graph-container">
-                    <div id="graph"></div>
-                </div>
+  <section class="hero is-info">
+    <div class="hero-body">
+      <h1 class="title">Make a fractal</h1>
+      <h2 class="subtitle">Fully client-side fractal visualization</h2>
+    </div>
+  </section>
+  <section class="section" id="main-section">
+    <div class="columns is-desktop">
+      <div class="column">
+        <!--<div class="box" id="graph-box">-->
+        <div id="form">
+          <div class="field">
+            <label class="label">Fractal</label>
+            <div class="control">
+              <div class="select is-primary">
+                <select id="fractal-select">
+                  <option>Select a fractal</option>
+                  <option value="barnsley">Barnsley's fern</option>
+                  <option value="koch">Koch snowflake</option>
+                </select>
+              </div>
             </div>
-            <div class="column">
-                <p>The fractals here are drawn using a neat technique known as an <a
-                        href="https://en.wikipedia.org/wiki/Iterated_function_system" target="_blank">iterated function
-                    system
-                    (IFS)</a>.
-                    Basically: for a given fractal, we have a set of transformations, each of which may be applied
-                    with
-                    some
-                    probability (e.g., 1 out of 10 times). These transformations are applied iteratively over and
-                    over -
-                    the more
-                    iterations, the more
-                    self-similarity emerges (and the cooler it looks).</p>
-                <br>
-                <p>The charting is done with the excellent <a href="https://github.com/danvk/dygraphs" target="_blank">dygraphs</a>
-                    library.</p>
-                <br>
-                <p>Currently implemented:</p>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Fractal</th>
-                        <th>Recommended iterations</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><a href="https://en.wikipedia.org/wiki/Barnsley_fern" target="_blank">Barnsley's fern</a>
-                        </td>
-                        <td>20,000 - 100,000</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <hr>
-                <p>TODO:</p>
-                <ul>
-                    <li>Center graph container</li>
-                    <li>Show computation time</li>
-                    <li>For now, plot the whole thing at once - eventually a "real-time" animation would be cooler -
-                        need to
-                        investigate that capability with dygraphs
-                    </li>
-                </ul>
+          </div>
+          <div class="field">
+            <label class="label">Iterations <a id="iterations-info"
+                                               title="Generally, really cool self-similarity tends to show up around 10^4 - 10^5 iterations. I wouldn't recommend going much beyond that, but since this is all client-side, it's really up to you (and your machine).">(?)</a></label>
+            <div class="control">
+              <input class="input is-info" id="iterations-input" type="number"
+                     placeholder="Max. 1,000,000">
             </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <button class="button is-success" id="draw-button">
+                Draw it
+              </button>
+            </div>
+          </div>
         </div>
-    </section>
+        <hr>
+        <p>Highlight a region to zoom in. Double-click to zoom back out.</p>
+        <div class="" id="graph-container">
+          <div id="graph"></div>
+        </div>
+      </div>
+      <div class="column">
+        <p>The fractals here are drawn using a neat technique known as an <a
+            href="https://en.wikipedia.org/wiki/Iterated_function_system" target="_blank">iterated function system
+          (IFS)</a>.
+          Basically: for a given fractal, we have a set of transformations, each of which may be applied
+          with some probability (e.g., 1 out of 10 times).
+          These transformations are applied iteratively over and over - the more iterations, the more self-similarity
+          emerges (and the cooler it looks).</p>
+        <br>
+        <p>The charting is done with the excellent <a href="https://github.com/danvk/dygraphs"
+                                                      target="_blank">dygraphs</a> library.</p>
+        <br>
+        <p>The following fractals are currently implemented:</p>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Fractal</th>
+            <th>Recommended min. iterations (to make it look cool)</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><a href="https://en.wikipedia.org/wiki/Barnsley_fern" target="_blank">Barnsley's fern</a></td>
+            <td>20,000</td>
+          </tr>
+          <tr>
+            <td><a href="https://en.wikipedia.org/wiki/Koch_snowflake" target="_blank">Koch snowflake</a></td>
+            <td>20,000</td>
+          </tr>
+          </tbody>
+        </table>
+        <hr>
+        <p>TODO:</p>
+        <ul>
+          <li>Center graph container</li>
+          <li>Show computation time</li>
+          <li>For now, plot the whole thing at once - eventually a "real-time" animation would be cooler - need to
+            investigate that capability with dygraphs
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
 </div>
 
 <div id="loading" class="loading"></div>
