@@ -150,31 +150,59 @@ function koch(iterations) {
   for (var i = 1; i < iterations; i++) {
     var roll = Math.random();
     var prev = data[i - 1];
+    var x = prev[0];
+    var y = prev[1];
+    var sqrt3 = Math.sqrt(3);
 
-    // 25% probability each
-    if (roll < 0.25) {
+    // TODO: There seem to be some stray points...
+    // 1/8 probability each
+    if (roll < 0.125) {
       data.push([
-        1.0 / 3.0 * prev[0],
-        1.0 / 3.0 * prev[1]
+        -1.0 / 3.0 * Math.abs(x) - 0.5,
+        1.0 / 3.0 * y + sqrt3 / 6.0
       ]);
     }
-    else if (roll < 0.50) {
+    else if (roll < 0.25) {
       data.push([
-        1.0 / 6.0 * prev[0] - Math.sqrt(3) / 6.0 * prev[1] + 1.0 / 3.0,
-        Math.sqrt(3) / 6.0 * prev[0] + 1.0 / 6.0 * prev[1]
+        1.0 / sqrt3 * Math.abs(y) - 0.5,
+        -1.0 / sqrt3 * Math.abs(x) + sqrt3 / 2.0
+      ]);
+    }
+    else if (roll < 0.375) {
+      data.push([
+        -1.0 / 3.0 * Math.abs(x) - 0.5,
+        1.0 / 3.0 * y - sqrt3 / 6.0
+      ]);
+    }
+    else if (roll < 0.5) {
+      data.push([
+        1.0 / sqrt3 * Math.abs(y) - 0.5,
+        1.0 / sqrt3 * Math.abs(x) - sqrt3 / 2.0
+      ]);
+    }
+    else if (roll < 0.625) {
+      data.push([
+        1.0 / 3.0 * Math.abs(x) + 0.5,
+        1.0 / 3.0 * y - sqrt3 / 6.0
       ]);
     }
     else if (roll < 0.75) {
       data.push([
-        1.0 / 6.0 * prev[0] + Math.sqrt(3) / 6.0 * prev[1] + 0.5,
-        -Math.sqrt(3) / 6.0 * prev[0] + 1.0 / 6.0 * prev[1] + Math.sqrt(3) / 6.0
+        -1.0 / sqrt3 * Math.abs(y) + 0.5,
+        1.0 / sqrt3 * Math.abs(x) - sqrt3 / 2.0
       ]);
+    }
+    else if (roll < 0.875) {
+      data.push([
+        1.0 / 3.0 * Math.abs(x) + 0.5,
+        1.0 / 3.0 * y + sqrt3 / 6.0
+      ])
     }
     else {
       data.push([
-        1.0 / 3.0 * prev[0] + 2.0 / 3.0,
-        1.0 / 3.0 * prev[1]
-      ]);
+        -1.0 / sqrt3 * Math.abs(y) + 0.5,
+        -1.0 / sqrt3 * Math.abs(x) + sqrt3 / 2.0
+      ])
     }
   }
   return data;
